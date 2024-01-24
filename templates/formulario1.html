@@ -1,0 +1,33 @@
+{%extends "layout.html"%}
+
+{%block content%}
+    <form action="/operaciones" method="POST">
+        <div style="margin-bottom: 30px;">
+            <div style="display: ruby; margin-right: 20px;">
+                <input type="radio" id="suma" name="operacion" value="suma" checked />
+                <label for="suma">Suma</label>
+            </div>
+    
+            <div style="display: ruby; margin-right: 20px;">
+                <input type="radio" id="resta" name="operacion" value="resta" />
+                <label for="resta">Resta</label>
+            </div>
+    
+            <div style="display: ruby; margin-right: 20px;">
+                <input type="radio" id="multiplicacion" name="operacion" value="multiplicacion" />
+                <label for="multiplicacion">Multiplicación</label>
+            </div>
+    
+            <div style="display: ruby; margin-right: 20px;">
+                <input type="radio" id="dividir" name="operacion" value="division" />
+                <label for="dividir">División</label>
+            </div>
+        </div>
+
+        <label>Número 1:</label>
+        <input type="text" name="n1" /><br>
+        <label>Número 2:</label>
+        <input type="text" name="n2" /><br>
+        <input type="submit">
+    </form>
+{%endblock%}
