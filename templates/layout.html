@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,19 +9,26 @@
     <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
 
     <style>
-        body{
+        body {
             padding-top: 0px;
         }
 
-        .tr-head{
+        .tr-head {
             background: #dff0d8;
+        }
+
+        .navbar {
+            margin-bottom: 0;
         }
     </style>
 
     <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="../static/css/cinepolis.css">
 </head>
+
 <body>
-    <div class="navbar navbar-inverse navbar-flxed-top">
+
+    <nav class="navbar navbar-inverse navbar-flxed-top">
         <div class="navbar-inner">
             <div class="container">
                 <a class="brand" href="">
@@ -42,19 +50,15 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </nav>
 
-    <div class="container">
-        <div class="row">
 
-            {%block content%}
+    {%block content%}
 
-            {%endblock%}
+    {%endblock%}
 
-        </div>
-    </div>
 
-    
 
 </body>
+
 </html>

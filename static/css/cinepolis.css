@@ -1,0 +1,106 @@
+.bg-image{
+    background-image: url("../imgs/cinepolis.png");
+    height: 95vh;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff;
+}
+
+h1{
+    font-size: 40px;
+}
+
+h2{
+    font-size: 35px;
+}
+
+h3{
+    font-size: 30px;
+}
+
+h4{
+    font-size: 25px;
+}
+
+.error{
+    color: rgb(255, 0, 0);
+    padding: 20px 0;
+}
+
+.centrar-texto{
+    text-align: center;
+}
+
+.titulo-header{
+    margin: 0;
+    padding: 30px 0;
+    color: #fff;
+}
+
+fieldset {
+    display: flex;
+    align-items: center;
+    border: 1px solid #fff;
+    padding: 10px;
+}
+
+legend {
+    margin: 0;
+    padding: 0 10px;
+    border: none;
+    font-weight: bold;
+    color: #fff;
+}
+
+.campo-radio{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.radio-button{
+    display: flex;
+    align-items: baseline;
+}
+
+.radio-button label{
+    margin-left: 5px;
+}
+
+.entradas-salidas{
+    display:flex;
+    justify-content: space-evenly;
+}
+
+.acciones{
+    display: flex;
+    justify-content: center;
+}
+
+.btn{
+    display: block;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.acciones fieldset .btn-limpiar{
+    background: #FF0000;
+}
+.acciones fieldset .btn-limpiar:hover{
+    background: #9e0000;
+    color: #fff;
+    transition: background 0.3s ease;
+}
+
+.acciones fieldset .btn-procesar{
+    background: green;
+}
+
+.acciones fieldset .btn-procesar:hover{
+    background: rgb(0, 103, 0);
+    color: #fff;
+    transition: background 0.3s ease;
+}

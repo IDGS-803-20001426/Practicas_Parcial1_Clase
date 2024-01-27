@@ -1,0 +1,63 @@
+{%extends "layout.html"%}
+
+{%block content%}
+<div class="bg-image">
+    <h1 class="titulo-header h1 centrar-texto">Cinepolis</h1>
+
+    <div class="entradas-salidas">
+        <fieldset>
+            <legend>Entradas</legend>
+            <form id="form-cine">
+                <div class="campo">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="nombre" id="nombre">
+                </div>
+                <div class="campo">
+                    <label for="cant-compradores">Cant. Compradores</label>
+                    <input type="number" name="cant-compradores" id="cant-compradores" min="1">
+                </div>
+                <div class="campo">
+                    <label for="">Tarjeta cineco</label>
+                    <div class="campo-radio">
+                        <div class="radio-button">
+                            <input type="radio" id="si" name="tarjeta" value="si" checked />
+                            <label for="si">Si</label>
+                        </div>
+                        <div class="radio-button">
+                            <input type="radio" id="no" name="tarjeta" value="no" />
+                            <label for="no">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="campo">
+                    <label for="cant-boletos">Cant. Boletos</label>
+                    <input type="number" name="cant-boletos" id="cant-boletos" min="1">
+                </div>
+            </form>
+        </fieldset>
+
+        <fieldset>
+            <legend>Salidas</legend>
+            <div class="campo-salida">
+                <label for="cant-pagar">Cant. Pagar</label>
+                <input type="text" name="cant-pagar" id="cant-pagar" disabled>
+                <label for="nom-comprador">Comprador</label>
+                <input type="text" name="nom-comprador" id="nom-comprador" disabled>
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="acciones">
+        <fieldset>
+            <legend>Acciones</legend>
+            <button class="btn btn-limpiar" type="button" onclick="limpiarCampos()">Limpiar</button>
+            <button class="btn btn-procesar" type="button" onclick="enviarFormulario()">Procesar</button>
+        </fieldset>
+    </div>
+
+    <h4 id="error" class="error centrar-texto"></h4>
+
+</div>
+
+<script src="../static/js/cinepolis.js"></script>
+{%endblock%}
