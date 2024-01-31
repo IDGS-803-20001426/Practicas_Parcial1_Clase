@@ -1,4 +1,6 @@
 from flask import Flask, render_template,request, jsonify
+import Ejercicio3_Forms
+from math import sqrt, pow
 
 app = Flask(__name__)
 
@@ -71,6 +73,30 @@ def procesar_formulario():
 
     return jsonify({'estatus': 'success' ,'comprador': nombre,'mensaje': '${0:.2f}'.format(total)})
 
+
+@app.route("/distancia", methods=["GET", "POST"])
+def distancia():
+    x1=0
+    x2=0
+    y1=0
+    y2=0
+    dist_form=Ejercicio3_Forms.UsersForm(request.form)
+    if request.method == 'POST':
+        x1=dist_form.x1.data
+        x2=dist_form.x2.data
+        y1=dist_form.y1.data
+        y2=dist_form.y2.data
+
+    distancia = sqrt(  ( (float(x2)-float(x1)) )**2 + (float(y2)-float(y1))**2 )
+
+    print("x1: {}".format(x1))
+    print("x2: {}".format(x2))
+    print("y1: {}".format(y1))
+    print("y2: {}".format(y2))
+    print("primera parte: {}".format( ( int (x2) - int(x1) )**2 ) )
+    print("segunda parte: {}".format((float(y2)-float(y1))**2))
+
+    return render_template("formDistancia.html", form=dist_form, distancia=distancia)
 
 
 if __name__=="__main__":
