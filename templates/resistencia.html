@@ -1,0 +1,44 @@
+{%extends "layout.html"%}
+
+{%block content%}
+<link rel="stylesheet" href="../static/css/resistencias.css">
+
+{% import "_macros.html" as macros %}
+
+<center>
+    <h1>Calculo de resistencias</h1>
+    <form id="form-resistencia">
+        {{macros.render_field(form.color1)}}
+        {{macros.render_field(form.color2)}}
+        {{macros.render_field(form.color3)}}
+        {{macros.render_field(form.tolerancia)}}
+        <button class="btn btn-procesar" type="button" onclick="enviarFormulario()">Procesar</button>
+    </form>
+</center>
+
+<center>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Color 1</th>
+                <th>Color 2</th>
+                <th>Color 3</th>
+                <th>Tolerancia</th>
+                <th>Valor</th>
+                <th>Valor máximo</th>
+                <th>Valor minimo</th>
+            </tr>
+        </thead>
+        <tbody id="bodyTabla">
+            <tr>
+                <td colspan="7" style="text-align: center;">Sin registros</td>
+            </tr>
+        </tbody>
+    
+    </table>
+</center>
+
+<h4 id="error" class="error centrar-texto"></h4>
+
+<script src="../static/js/resistencia.js"></script>
+{%endblock%}
