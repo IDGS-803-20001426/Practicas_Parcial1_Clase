@@ -1,5 +1,6 @@
 from flask import Flask, render_template,request, jsonify
 import Ejercicio3_Forms
+import Form_Resistencia
 from math import sqrt, pow
 
 app = Flask(__name__)
@@ -98,6 +99,58 @@ def distancia():
 
     return render_template("formDistancia.html", form=dist_form, distancia=distancia)
 
+@app.route("/resistencia", methods=["GET", "POST"])
+def resistencia():
+    dist_Selec = Form_Resistencia.UsersForm(request.form)
+    if request.method == 'POST':
+        color1=dist_Selec.color1.data
+        color2=dist_Selec.color2.data
+        color3=dist_Selec.color3.data
+        tolerancia=dist_Selec.tolerancia.data
+    return render_template("resistencia.html", form=dist_Selec);
+
+@app.route("/procesarFormResistenca", methods=["GET", "POST"])
+def formResistencia():
+    color1 = request.form.get("color1")
+    color2 = request.form.get("color2")
+    color3 = request.form.get("color3")
+    tolerancia = request.form.get("tolerancia")
+    obj = Resistencia(color1, color2, color3, tolerancia)
+    return obj.calcularValor()
+
+class Resistencia:
+    color1 = ''
+    color2 = ''
+    color3 = ''
+    tolerancia = ''
+    diccionarioColores = {'negro' : 0 , 'cafe' : 1, 'rojo': 2, 'naranja': 3, 'amarillo': 4, 'verde': 5, 'azul': 6, 'violeta': 7, 'gris': 8, 'blanco':9}
+    diccionarioColores2 = {'negro' : 1 , 'cafe' : 10, 'rojo': 100, 'naranja': 1000, 'amarillo': 10000, 'verde': 100000, 'azul': 1000000, 'violeta': 10000000, 'gris': 100000000, 'blanco':1000000000}
+    diccionarioColores3 = {'dorado' : .05, 'plata' : .1}
+
+    #Definicion del constructor
+    def __init__(self, a,b,c,d):
+        self.color1 = a
+        self.color2 = b
+        self.color3 = c
+        self.tolerancia = d
+
+    def calcularValor(self):
+        valorReal = int(str(self.diccionarioColores[self.color1]) + str(self.diccionarioColores[self.color2])) * self.diccionarioColores2[self.color3]
+        valorMaximo = valorReal + (valorReal * self.diccionarioColores3[self.tolerancia])
+        valorMinimo = valorReal - (valorReal * self.diccionarioColores3[self.tolerancia])
+        
+        print("valor {}, maximo {}, minimo {}".format(valorReal, valorMaximo, valorMinimo))
+
+        return jsonify({
+                'estatus': 'success' , 
+                'valorReal': valorReal, 
+                'valorMaximo': valorMaximo, 
+                'valorMinimo': valorMinimo, 
+                "color1": self.color1, 
+                "color2": self.color2, 
+                "color3": self.color3, 
+                "tolerancia": self.tolerancia 
+            })
 
 if __name__=="__main__":
     app.run(debug=True)

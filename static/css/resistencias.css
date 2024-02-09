@@ -1,0 +1,79 @@
+.negro{
+    background-color: black;
+}
+
+.cafe{
+    background-color: brown;
+}
+
+.rojo{
+    background-color: red;
+}
+
+.naranja{
+    background-color: orange;
+}
+
+.amarillo{
+    background-color: yellow;
+}
+
+.verde{
+    background-color: green;
+}
+
+.azul{
+    background-color: blue;
+}
+
+.violeta{
+    background-color: violet;
+}
+
+.gris{
+    background-color: gray;
+}
+
+.blanco{
+    background-color: white;
+}
+
+.dorado{
+    background-color: gold;
+}
+
+.plata{
+    background-color: silver;
+}
+
+.text-white{
+    color: white;
+}
+
+.btn{
+    display: block;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.btn-procesar{
+    background: green;
+}
+
+.btn-procesar:hover{
+    background: rgb(0, 103, 0);
+    color: #fff;
+    transition: background 0.3s ease;
+}
+
+.error{
+    color: rgb(255, 0, 0);
+    padding: 20px 0;
+}
+
+.centrar-texto{
+    text-align: center;
+}
