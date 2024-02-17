@@ -1,0 +1,68 @@
+{%extends "layout.html"%}
+
+{%block content%}
+
+{% import "_macros.html" as macros %}
+
+<style>
+    .custom-radio-field{
+        display: flex;
+        justify-content: space-evenly;
+        list-style-type: none;
+    }
+
+    ul{
+        margin: 0;
+    }
+</style>
+
+<center>
+    <h1>Traductor</h1>
+    <div style="display: flex; justify-content: space-evenly;">
+        <form action="/traductor-registrar" method="post" novalidate>
+            <h4>Registrar</h4>
+            {{macros.render_field(form_registro.reg_ingles)}}
+            {{macros.render_field(form_registro.reg_espanol)}}
+            <input type="submit" name="btn1" value="Registrar">
+            <!-- Mensaje de registro -->
+            <div id="mensaje">
+                {% if mensaje %}
+                    <p>{{ mensaje }}</p>
+                {% endif %}
+            </div>
+        </form>
+        <form action="/traductor-buscar" method="post" novalidate>
+            <h4>Buscar registro</h4>
+            {{macros.render_field(form_busqueda.select_idioma)}}
+            {{macros.render_field(form_busqueda.leer_reg)}}
+            {{macros.render_field(form_busqueda.resultado, custom_value=traduccion)}}
+            <input type="submit" name="btn1" value="Buscar">
+        </form>
+    </div>
+</center>
+
+
+<script>
+    // Función para ocultar el mensaje después de 3 segundos
+    function ocultarMensaje() {
+        setTimeout(function() {
+            document.getElementById("mensaje").style.display = "none";
+        }, 3000);
+    }
+
+    // Función para limpiar el formulario después de 3 segundos
+    function limpiarFormulario() {
+        setTimeout(function() {
+            document.getElementById("miFormulario").reset();
+        }, 3000);
+    }
+
+    // Función para ejecutar acciones después de cargar la página
+    document.addEventListener("DOMContentLoaded", function() {
+        ocultarMensaje();  // Ocultar mensaje después de 3 segundos
+        limpiarFormulario();  // Limpiar formulario después de 3 segundos
+    });
+</script>
+
+
+{%endblock%}

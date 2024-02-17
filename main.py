@@ -1,6 +1,8 @@
 from flask import Flask, render_template,request, jsonify
-import Ejercicio3_Forms
+from io import open
+import Form
 import Form_Resistencia
+import FormArchivo
 from math import sqrt, pow
 
 app = Flask(__name__)
@@ -81,7 +83,7 @@ def distancia():
     x2=0
     y1=0
     y2=0
-    dist_form=Ejercicio3_Forms.UsersForm(request.form)
+    dist_form=Form.UsersForm(request.form)
     if request.method == 'POST':
         x1=dist_form.x1.data
         x2=dist_form.x2.data
@@ -151,6 +153,79 @@ class Resistencia:
                 "color3": self.color3, 
                 "tolerancia": self.tolerancia 
             })
+
+dist_Archivo_Registro = FormArchivo.FormArchivoRegistro()
+dist_Archivo_Busqueda = FormArchivo.FormArchivoBusqueda()
+
+@app.route("/traductor", methods=["GET", "POST"])
+def traductor():
+    return render_template("traductor.html", form_registro=dist_Archivo_Registro, form_busqueda=dist_Archivo_Busqueda)
+
+@app.route("/traductor-registrar", methods=["GET", "POST"])
+def traductorRegistrar():
+    form_registro = FormArchivo.FormArchivoRegistro(request.form)
+    mensaje = None  # Inicializamos el mensaje como None
+
+    if request.method == 'POST' and form_registro.validate():
+        reg_esp = request.form.get("reg_espanol")
+        reg_ingles = request.form.get("reg_ingles")
+
+        obj = Archivo()
+        obj.registrar(reg_esp, reg_ingles)
+
+        mensaje = "¡Registrado con éxito!"  # Establecemos el mensaje
+
+    return render_template("traductor.html", form_registro=form_registro, form_busqueda=dist_Archivo_Busqueda, mensaje=mensaje)
+
+
+@app.route("/traductor-buscar", methods=["GET", "POST"])
+def traductorBuscar():
+    form_busqueda = FormArchivo.FormArchivoBusqueda(request.form)
+    traduccion=''
+    if request.method == 'POST' and form_busqueda.validate():
+        select_idioma = request.form.get("select_idioma")
+        leer_reg = request.form.get("leer_reg")
+
+        obj = Archivo()
+        traduccion = obj.buscar(select_idioma, leer_reg)
+
+    return render_template("traductor.html", form_registro=dist_Archivo_Registro, form_busqueda=form_busqueda, traduccion=traduccion)
+
+class Archivo:
+    registro_español = ''
+    registro_ingles = ''
+    busqueda_select = ''
+    busqueda_palabrea = ''
+    #Definicion del constructor
+    def __init__(self):
+        pass
+
+    def registrar(self, registro_español, registro_ingles):
+        archivo=open("traductor.txt", 'a')
+        archivo.write('\n' + registro_español + '-' + registro_ingles)
+        archivo.close()
+    
+    def buscar(self, busqueda_select, busqueda_palabra):
+        palabra_traducida=''
+        archivo=open("traductor.txt", 'r')
+        for lineas in archivo.readlines():
+            columnas = lineas.rstrip().split('-')
+            if busqueda_select == 'espanol':
+                if busqueda_palabra.lower() in columnas[0].lower():
+                    palabra_traducida=columnas[1]
+                    break           
+            
+            if busqueda_select == 'ingles':
+                if busqueda_palabra.lower() in columnas[1].lower():
+                    palabra_traducida=columnas[0]
+                    break
+
+        archivo.close()
+
+        if palabra_traducida == '':
+            return 'No se encontró la traduccion'
+        else:
+            return palabra_traducida
 
 if __name__=="__main__":
     app.run(debug=True)
